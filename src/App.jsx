@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import DropdownFilter from './components/DropdownFilter';
+import { useDispatch, useSelector } from 'react-redux';
+import CategoriesFilter from './components/CategoriesFilter';
 import { movies$ } from './movies';
+import { allCategories, allMovies } from './store/reducers/movie';
 
 /**
  * Return the App base component
@@ -9,20 +11,25 @@ import { movies$ } from './movies';
  * @constructor
  */
 function App() {
-  const [categories, setCategories] = useState([]);
-  const [movies, setMovies] = useState([]);
+  const dispatch = useDispatch();
+  const { movies } = useSelector((state) => state.movies);
+  const { categories } = useSelector((state) => state.movies);
 
   useEffect(() => {
-    movies$.then((moviesData) => {
-      const categoriesList = moviesData.map((movie) => movie.category);
-      setCategories([...new Set(categoriesList)]);
-      setMovies(moviesData);
-    });
-  }, [movies]);
+    movies$
+      .then((moviesData) => {
+        dispatch(allMovies(moviesData));
+        dispatch(allCategories(moviesData));
+      })
+      .catch((e) => new Error(`could not load data: ${e}`));
+  }, [dispatch, movies]);
 
   return (
     <div className="App">
-      <DropdownFilter categories={categories} />
+      <ol>
+        {movies && movies.map((movie) => (<li key={movie.id}>{movie.title}</li>))}
+      </ol>
+      <CategoriesFilter movies={movies} categories={categories} />
     </div>
   );
 }
