@@ -4,19 +4,17 @@ import { deleteMovie } from '../store/reducers/movie';
 import LikeButton from './LikeButton';
 
 const Card = styled.div`
-  min-height: 20em;
+  height: 20em;
   min-width: 90%;
   max-width: max(30%);
   margin: 1em;
   padding: 1em;
   border: beige dashed medium;
   border-radius: 12px;
-  //background: antiquewhite;
 `;
 
-const Container = styled.div`
+const CardsContainer = styled.div`
   width: 80%;
-  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: start;
@@ -24,7 +22,7 @@ const Container = styled.div`
   overflow: auto;
   margin: 2em;
   padding: 2em;
-  @media (max-width: 60em){
+  @media (max-width: 80em){
     grid-template-columns: 1fr;
   }
 `;
@@ -38,6 +36,11 @@ const Title = styled.div`
   }
 `;
 
+const CardsDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 /**
  * Displays each movie in a card
  * @param movies
@@ -48,8 +51,8 @@ export default function MovieCards({ movies }) {
   const dispatch = useDispatch();
 
   return (
-    <div>
-      <Container>
+    <CardsDiv>
+      <CardsContainer>
         {movies.map((movie) => (
           <Card key={movie.id}>
             <Title>
@@ -62,7 +65,7 @@ export default function MovieCards({ movies }) {
             <LikeButton movie={movie} />
           </Card>
         ))}
-      </Container>
-    </div>
+      </CardsContainer>
+    </CardsDiv>
   );
 }
