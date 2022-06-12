@@ -25,8 +25,6 @@ const categoriesSlice = createSlice({
       const category = action.payload;
       const existingCategory = state.categories.find((cat) => cat.name === category.name);
       existingCategory.isSelected = !category.isSelected;
-      // eslint-disable-next-line no-param-reassign
-      // state.categories[category.name].isSelected = !category.isSelected;
       return state;
     },
   }

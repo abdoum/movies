@@ -20,10 +20,22 @@ const moviesSlice = createSlice({
       state.movies = state.movies.filter((movie) => movie.id !== id);
       return state;
     },
+    like: (state, action) => {
+      const movieId = action.payload;
+      // eslint-disable-next-line no-param-reassign,no-plusplus
+      state.movies.filter((movie) => movie.id === movieId).map((movie) => movie.likes++);
+      return state;
+    },
+    dislike: (state, action) => {
+      const movieId = action.payload;
+      // eslint-disable-next-line no-param-reassign,no-plusplus
+      state.movies.filter((movie) => movie.id === movieId).map((movie) => movie.dislikes++);
+      return state;
+    }
   }
 });
 
 export const {
-  allMovies, deleteMovie
+  allMovies, deleteMovie, like, dislike
 } = moviesSlice.actions;
 export default moviesSlice.reducer;
