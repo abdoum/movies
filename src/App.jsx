@@ -1,9 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
-import CategoriesFilter from './components/CategoriesFilter';
+import styled from 'styled-components';
 import { movies$ } from './movies';
-import { allCategories, allMovies } from './store/reducers/movie';
+import { allMovies } from './store/reducers/movie';
+import MovieCards from './components/MovieCards';
+import { allCategories } from './store/reducers/category';
+import CategoriesFilter from './components/CategoriesFilter';
+import Loader from './components/Loader';
+
+const AppContainer = styled.div`
+  background-color: black;
+  min-height: 100vh;
+  color: white;
+  display: grid;
+  grid-template-columns: 12em 1fr;
+`;
 
 /**
  * Return the App base component
@@ -13,24 +25,43 @@ import { allCategories, allMovies } from './store/reducers/movie';
 function App() {
   const dispatch = useDispatch();
   const { movies } = useSelector((state) => state.movies);
-  const { categories } = useSelector((state) => state.movies);
+  const { categories } = useSelector((state) => state.categories);
+  const [filteredMovies, setFilteredMovies] = useState(movies);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    movies$
-      .then((moviesData) => {
-        dispatch(allMovies(moviesData));
-        dispatch(allCategories(moviesData));
-      })
-      .catch((e) => new Error(`could not load data: ${e}`));
-  }, [dispatch, movies]);
+    if (movies?.length > 0 && categories?.length > 0) {
+      const selectedCategories = categories
+        .filter((cat) => cat.isSelected).map((cat) => cat.name.toLowerCase());
+      if (selectedCategories.length > 0) {
+        setFilteredMovies(movies.filter((movie) => selectedCategories
+          .includes(movie.category.toLowerCase())));
+      } else {
+        setFilteredMovies(movies);
+        setLoading(false);
+      }
+    } else {
+      movies$
+        .then((moviesData) => {
+          setLoading(false);
+          dispatch(allMovies(moviesData));
+          dispatch(allCategories(moviesData));
+        })
+        .catch((e) => new Error(`could not load data: ${e}`));
+    }
+  }, [movies, categories]);
 
   return (
-    <div className="App">
-      <ol>
-        {movies && movies.map((movie) => (<li key={movie.id}>{movie.title}</li>))}
-      </ol>
-      <CategoriesFilter movies={movies} categories={categories} />
-    </div>
+    <AppContainer>
+      {loading
+        ? <Loader />
+        : (
+          <>
+            <CategoriesFilter movies={movies} categories={categories} />
+            {movies && <MovieCards movies={filteredMovies} />}
+          </>
+        )}
+    </AppContainer>
   );
 }
 

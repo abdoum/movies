@@ -63,4 +63,4 @@ const movies = [
 ];
 
 // eslint-disable-next-line no-promise-executor-return,import/prefer-default-export
-export const movies$ = new Promise((resolve) => setTimeout(resolve, 100, movies));
+export const movies$ = new Promise((resolve) => setTimeout(resolve, 1000, movies));

@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const defaultState = {
-  categories: [{
-    name: '',
-    isSelected: false
-  }]
+  categories: []
 };
 
 const categoriesSlice = createSlice({
@@ -12,16 +9,16 @@ const categoriesSlice = createSlice({
   initialState: defaultState,
   reducers: {
     allCategories: (state, action) => {
-      const movies = action.payload;
-      const categories = movies.map((movie) => movie.category);
-      const distinctCategories = [...new Set(categories)];
-      const categoriesObjects = distinctCategories.map((cat) => (
-        {
-          name: cat,
-          isSelected: false
-        }));
+      const moviesCategories = action.payload.map((movie) => movie.category);
       // eslint-disable-next-line no-param-reassign
-      state.categories = categoriesObjects;
+      state.categories = [...new Set(moviesCategories)].map((cat) => {
+        const occurrences = (cats, val) => cats.reduce((a, v) => (v === val ? a + 1 : a), 0);
+        return {
+          name: cat,
+          isSelected: false,
+          occurrences: occurrences(moviesCategories, cat)
+        };
+      });
       return state;
     },
     toggleSelected: (state, action) => {

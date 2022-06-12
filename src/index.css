@@ -13,7 +13,7 @@ code {
 }
 
 :root {
-  --form-control-color: rebeccapurple;
+  --form-control-color: beige;
   --form-control-disabled: #959495;
 }
 
@@ -40,7 +40,6 @@ form {
 
 .form-control {
   font-family: system-ui, sans-serif;
-  font-size: 2rem;
   font-weight: bold;
   line-height: 1.1;
   display: grid;
