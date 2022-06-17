@@ -45,7 +45,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 - [x] Display an indicator like youtube for likes/dislikes ratio
 - [x] Cards shall be responsive.
 - [x] Add a button on each card to be able to delete a movie
-- [ ] Add a toggle button for like/dislike
+- [x] Add a toggle button for like/dislike
 - [x] Add a multiselect category filter. Categories should be dynamically fetched from movies.
 - [x] If all movies belonging to a category are deleted, the category's filter shouldn't appear.
 - [x] Add a pagination functionality with 'next' and 'previous' and items per page select (4, 8 or 12)
