@@ -1,5 +1,32 @@
 # 🎬 Movies App
 
+## Main functionality
+
+
+- [x] List movies inside cards.
+- [x] Make titles bold & show movie category.
+- [x] Display an indicator like youtube for likes/dislikes ratio
+- [x] Cards shall be responsive.
+- [x] Add a button on each card to be able to delete a movie
+- [x] Add a toggle button for like/dislike
+- [x] Add a multiselect category filter. Categories should be dynamically fetched from movies.
+- [x] If all movies belonging to a category are deleted, the category's filter shouldn't appear.
+- [x] Add a pagination functionality with 'next' and 'previous' and items per page select (4, 8 or 12)
+
+
+### Items per page
+![](src/gifs/items-per-page.gif)
+### Pagination
+![](src/gifs/pagination.gif)
+### Responsiveness
+![](src/gifs/responsiveness.gif)
+### Delete movie & update categories
+![](src/gifs/delete-movie-update-categories.gif)
+### Like & dislike
+![](src/gifs/like-dislike.gif)
+### Dynamic title
+![](src/gifs/dynamic-title.gif)
+
 ## How to run?
 
 In the project directory, you can run:
@@ -37,15 +64,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Main functionality
-
-
-- [x] List movies inside cards.
-- [x] Make titles bold & show movie category.
-- [x] Display an indicator like youtube for likes/dislikes ratio
-- [x] Cards shall be responsive.
-- [x] Add a button on each card to be able to delete a movie
-- [x] Add a toggle button for like/dislike
-- [x] Add a multiselect category filter. Categories should be dynamically fetched from movies.
-- [x] If all movies belonging to a category are deleted, the category's filter shouldn't appear.
-- [x] Add a pagination functionality with 'next' and 'previous' and items per page select (4, 8 or 12)
