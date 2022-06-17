@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { selectCount, setAllCounts } from '../store/reducers/itemsPerPage';
+import { selectCount, setAllCounts } from '../store/reducers/items';
 import { selectPage } from '../store/reducers/page';
 
 const Select = styled.div`

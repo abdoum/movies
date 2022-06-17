@@ -3,7 +3,7 @@ import { render as rtlRender } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import moviesReducer from './store/reducers/movie';
 import categoriesReducer from './store/reducers/category';
-import itemsReducer from './store/reducers/itemsPerPage';
+import itemsReducer from './store/reducers/items';
 import pagesReducer from './store/reducers/page';
 
 function render(
