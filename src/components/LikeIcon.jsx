@@ -1,3 +1,8 @@
+/**
+ * Thumbs up icon
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function LikeIcon() {
   return (
     <svg

@@ -40,6 +40,11 @@ const Select = styled.div`
   }
 `;
 
+/**
+ * Item per page selector
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function ItemsPerPage() {
   const dispatch = useDispatch();
   const { selectedCount } = useSelector((state) => state.items);

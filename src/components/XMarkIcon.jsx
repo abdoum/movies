@@ -1,3 +1,8 @@
+/**
+ * X-mark icon
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function XMarkIcon() {
   return (
     <svg

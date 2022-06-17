@@ -17,4 +17,7 @@ const PageNumberDiv = styled.div`
   }
 `;
 
+/**
+ * Page number container
+ */
 export default PageNumberDiv;

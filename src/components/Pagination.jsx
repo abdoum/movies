@@ -23,6 +23,12 @@ const PaginationContainer = styled.div`
   }
 `;
 
+/**
+ * Pagination controls
+ * @param moviesCount
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Pagination({ moviesCount }) {
   const dispatch = useDispatch();
   const { selectedCount } = useSelector((state) => state.items);
