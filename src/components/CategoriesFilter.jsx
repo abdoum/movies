@@ -84,6 +84,12 @@ const FiltersContainer = styled.div`
   }
 `;
 
+/**
+ * Filters for movies categories. If all movies from a category are deleted,
+ * the corresponding category won't appear anymore.
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function CategoriesFilter() {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);

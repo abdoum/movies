@@ -10,10 +10,18 @@ const CounterDiv = styled.div`
   opacity: .9;
 `;
 
+/**
+ * Displays the number of likes
+ * @param count
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Counter({ count }) {
   const formatCount = () => (count > 999 ? `${Math.floor(count / 1000).toString()} K` : count);
 
   return (
-    <CounterDiv title="counter">{formatCount()}</CounterDiv>
+    <CounterDiv title="counter">
+      {formatCount()}
+    </CounterDiv>
   );
 }

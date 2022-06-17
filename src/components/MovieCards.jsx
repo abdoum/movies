@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { deleteMovie } from '../store/reducers/movie';
 import LikeButton from './LikeButton';
 import Pagination from './Pagination';
@@ -29,11 +30,6 @@ const Card = styled.div`
     color: darkgray;
     padding: .3rem .4rem;
     background-color: transparent;
-    :hover {
-      color: var(--secondary-color);
-      transition: background 250ms ease-in-out,
-      transform 150ms ease;
-    }
   }
 `;
 
@@ -54,7 +50,6 @@ const CardsContainer = styled.div`
 
 const MovieTitle = styled.div`
   position: relative;
-
   button {
     position: absolute;
     right: 0;
@@ -107,16 +102,30 @@ export default function MovieCards({ filteredMovies }) {
     <CardsDiv>
       <CardsContainer>
         {moviesPerPage.map((movie, index) => (
-          <Card key={movie.id} data-testid={`movie${index}`}>
-            <MovieTitle>
-              <h3>{movie.title}</h3>
-              <DeleteMovieButton index={index} clickAction={() => removeMovie(movie.id)} />
-            </MovieTitle>
-            <em>
-              {movie.category}
-            </em>
-            <LikeButton movie={movie} />
-          </Card>
+          <motion.div
+            initial={{ opacity: 0, y: -100 }}
+            animate={{
+              opacity: 1,
+              color: 'var(--primary-color);',
+              y: 0
+            }}
+          >
+            <Card key={movie.id} data-testid={`movie${index}`}>
+              <MovieTitle>
+                <h3>
+                  {movie.title}
+                </h3>
+                <DeleteMovieButton
+                  index={index}
+                  clickAction={() => removeMovie(movie.id)}
+                />
+              </MovieTitle>
+              <em>
+                {movie.category}
+              </em>
+              <LikeButton movie={movie} />
+            </Card>
+          </motion.div>
         ))}
         <Pagination moviesCount={filteredMovies.length} />
       </CardsContainer>

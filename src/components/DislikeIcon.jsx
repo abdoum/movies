@@ -1,3 +1,8 @@
+/**
+ * Dislike movie icon
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function DislikeIcon() {
   return (
     <svg
