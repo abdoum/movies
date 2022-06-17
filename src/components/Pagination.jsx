@@ -15,7 +15,9 @@ const PaginationContainer = styled.div`
   display: -webkit-inline-box;
   justify-content: space-around;
   margin: auto;
-
+  @media (max-width: 80em){
+    grid-column: span 1;
+  }
   svg {
     width: 20px;
     height: 20px;

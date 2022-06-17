@@ -12,12 +12,14 @@ import Loader from './components/Loader';
 import useInterval from './hooks/useInterval';
 
 const AppContainer = styled.div`
-  background: rgb(3,4,3);
   background: var(--main-bg-color);
   min-height: 100vh;
   color: white;
   display: grid;
   grid-template-columns: 12em 1fr;
+  @media (max-width: 80em){
+    grid-template-columns: 1fr;
+  }
 `;
 
 /**

@@ -34,14 +34,15 @@ const Card = styled.div`
 `;
 
 const CardsContainer = styled.div`
-  width: 80%;
+  width: 80vw;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: repeat(3, 1fr) auto;
   align-items: start;
   justify-content: space-between;
   overflow: auto;
-  margin: 2em;
+  grid-gap: 2em;
   padding: 2em;
   @media (max-width: 80em){
     grid-template-columns: 1fr;
