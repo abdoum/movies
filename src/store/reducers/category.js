@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const defaultState = {
-  categories: []
+  categories: [],
+  selectedCategories: []
 };
 
 const categoriesSlice = createSlice({
@@ -25,6 +26,15 @@ const categoriesSlice = createSlice({
       const category = action.payload;
       const existingCategory = state.categories.find((cat) => cat.name === category.name);
       existingCategory.isSelected = !category.isSelected;
+      if (existingCategory.isSelected) {
+        // eslint-disable-next-line no-param-reassign
+        state.selectedCategories = [...state.selectedCategories,
+          existingCategory.name.toLowerCase()];
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        state.selectedCategories = state.selectedCategories
+          .filter((cat) => cat !== existingCategory.name.toLowerCase());
+      }
       return state;
     },
   }
