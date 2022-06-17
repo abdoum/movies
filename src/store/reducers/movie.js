@@ -23,19 +23,55 @@ const moviesSlice = createSlice({
     like: (state, action) => {
       const movieId = action.payload;
       // eslint-disable-next-line no-param-reassign,no-plusplus
-      state.movies.filter((movie) => movie.id === movieId).map((movie) => movie.likes++);
+      state.movies.filter((movie) => movie.id === movieId).map((movie) => {
+        // eslint-disable-next-line no-param-reassign
+        movie.liked = true;
+        // eslint-disable-next-line no-param-reassign,no-plusplus
+        movie.likes++;
+        return movie;
+      });
+      return state;
+    },
+    unlike: (state, action) => {
+      const movieId = action.payload;
+      // eslint-disable-next-line no-param-reassign,no-plusplus
+      state.movies.filter((movie) => movie.id === movieId).map((movie) => {
+        // eslint-disable-next-line no-param-reassign
+        movie.liked = false;
+        // eslint-disable-next-line no-param-reassign,no-plusplus
+        movie.likes--;
+        return movie;
+      });
       return state;
     },
     dislike: (state, action) => {
       const movieId = action.payload;
       // eslint-disable-next-line no-param-reassign,no-plusplus
-      state.movies.filter((movie) => movie.id === movieId).map((movie) => movie.dislikes++);
+      state.movies.filter((movie) => movie.id === movieId).map((movie) => {
+        // eslint-disable-next-line no-param-reassign
+        movie.disliked = true;
+        // eslint-disable-next-line no-param-reassign,no-plusplus
+        movie.dislikes++;
+        return movie;
+      });
+      return state;
+    },
+    unDislike: (state, action) => {
+      const movieId = action.payload;
+      // eslint-disable-next-line no-param-reassign,no-plusplus
+      state.movies.filter((movie) => movie.id === movieId).map((movie) => {
+        // eslint-disable-next-line no-param-reassign
+        movie.disliked = false;
+        // eslint-disable-next-line no-param-reassign,no-plusplus
+        movie.dislikes--;
+        return movie;
+      });
       return state;
     }
   }
 });
 
 export const {
-  allMovies, deleteMovie, like, dislike
+  allMovies, deleteMovie, like, unlike, dislike, unDislike
 } = moviesSlice.actions;
 export default moviesSlice.reducer;

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
-import { dislike, like } from '../store/reducers/movie';
+import {
+  dislike, like, unDislike, unlike
+} from '../store/reducers/movie';
 import LikeIcon from './LikeIcon';
 import DislikeIcon from './DislikeIcon';
 import Counter from './Counter';
@@ -59,17 +61,39 @@ const LikesSection = styled.div`
  */
 export default function LikeButton({ movie }) {
   const dispatch = useDispatch();
+
+  function likeToggle(id) {
+    if (movie.liked) {
+      dispatch(unlike(id));
+    } else {
+      dispatch(like(id));
+      if (movie.disliked) {
+        dispatch(unDislike(id));
+      }
+    }
+  }
+  function dislikeToggle(id) {
+    if (movie.disliked) {
+      dispatch(unDislike(id));
+    } else {
+      dispatch(dislike(id));
+      if (movie.liked) {
+        dispatch(unlike(id));
+      }
+    }
+  }
+
   return (
     <LikesSection>
       <LogosContainer>
         <motion.div whileHover={{ scale: 1.2, textShadow: '0px 0px 8px rgb(255,255,255)' }}>
-          <Logo title="like" data-testid={`like-button-${movie.id}`} onClick={() => dispatch(like(movie.id))}>
+          <Logo title="like" data-testid={`like-button-${movie.id}`} style={{ color: movie.liked ? 'var(--primary-color)' : 'grey' }} onClick={() => likeToggle(movie.id)}>
             <LikeIcon />
           </Logo>
         </motion.div>
         <Counter count={movie.likes} />
         <motion.div whileHover={{ scale: 1.2, textShadow: '0px 0px 8px rgb(255,255,255)' }}>
-          <Logo title="dislike" onClick={() => dispatch(dislike(movie.id))}>
+          <Logo title="dislike" style={{ color: movie.disliked ? 'var(--secondary-color)' : 'grey' }} onClick={() => dislikeToggle(movie.id)}>
             <DislikeIcon />
           </Logo>
         </motion.div>

@@ -103,6 +103,7 @@ export default function MovieCards({ filteredMovies }) {
       <CardsContainer>
         {moviesPerPage.map((movie, index) => (
           <motion.div
+            key={movie.id}
             initial={{ opacity: 0, y: -100 }}
             animate={{
               opacity: 1,
