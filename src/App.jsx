@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { movies$ } from './movies';
 import { allMovies } from './store/reducers/movie';
 import MovieCards from './components/MovieCards';
@@ -31,6 +32,7 @@ function App() {
   const { selectedCategories } = useSelector((state) => state.categories);
   const [filteredMovies, setFilteredMovies] = useState(movies);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
   const { selectedCount } = useSelector((state) => state.items);
   const [title, setTitle] = useState('Movie APp');
   const [offset, setOffset] = useState(0);
@@ -62,7 +64,10 @@ function App() {
           dispatch(allMovies(moviesData));
           dispatch(allCategories(moviesData));
         })
-        .catch((e) => new Error(`could not load data: ${e}`));
+        .catch((e) => {
+          setError(e);
+          return new Error(`could not load data: ${e}}`);
+        });
     }
   }
 
@@ -84,6 +89,12 @@ function App() {
             {movies && <MovieCards filteredMovies={filteredMovies} />}
           </>
         )}
+      {error && (
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        :( Error...
+        Could not load data...
+      </motion.div>
+      )}
     </AppContainer>
   );
 }

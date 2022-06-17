@@ -1,5 +1,11 @@
 import PageNumberDiv from './PageNumberDiv';
 
+/**
+ * Previous page button
+ * @param onClick
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function PreviousPageButton({ onClick }) {
   return (
     <PageNumberDiv onClick={onClick}>

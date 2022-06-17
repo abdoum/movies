@@ -28,7 +28,7 @@ div.selected {
     border: .2em var(--primary-color) solid;
 }
 
-h1, h2, h3 {
+h1, h3 {
     color: var(--primary-color);
 }
 

@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import * as pageActions from './page';
+import pagesReducer from './page';
 
 describe('Page actions', () => {
   it('should create a select page action object', () => {

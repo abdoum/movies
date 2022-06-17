@@ -1,9 +1,22 @@
+import { motion } from 'framer-motion';
 import XMarkIcon from './XMarkIcon';
 
+/**
+ * Button to delete a movie
+ * @param clickAction
+ * @param index
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function DeleteMovieButton({ clickAction, index }) {
   return (
-    <button data-testid={`delete-button${index}`} type="button" onClick={clickAction}>
+    <motion.button
+      whileHover={{ scale: 1.9, color: 'var(--secondary-color)' }}
+      data-testid={`delete-button${index}`}
+      type="button"
+      onClick={clickAction}
+    >
       <XMarkIcon />
-    </button>
+    </motion.button>
   );
 }

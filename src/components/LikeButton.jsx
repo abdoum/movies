@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 import { dislike, like } from '../store/reducers/movie';
 import LikeIcon from './LikeIcon';
 import DislikeIcon from './DislikeIcon';
@@ -50,18 +51,28 @@ const LikesSection = styled.div`
   height: 70%;
 `;
 
+/**
+ * Like button.
+ * @param movie
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function LikeButton({ movie }) {
   const dispatch = useDispatch();
   return (
     <LikesSection>
       <LogosContainer>
-        <Logo title="like" data-testid={`like-button-${movie.id}`} onClick={() => dispatch(like(movie.id))}>
-          <LikeIcon />
-        </Logo>
+        <motion.div whileHover={{ scale: 1.2, textShadow: '0px 0px 8px rgb(255,255,255)' }}>
+          <Logo title="like" data-testid={`like-button-${movie.id}`} onClick={() => dispatch(like(movie.id))}>
+            <LikeIcon />
+          </Logo>
+        </motion.div>
         <Counter count={movie.likes} />
-        <Logo title="dislike" onClick={() => dispatch(dislike(movie.id))}>
-          <DislikeIcon />
-        </Logo>
+        <motion.div whileHover={{ scale: 1.2, textShadow: '0px 0px 8px rgb(255,255,255)' }}>
+          <Logo title="dislike" onClick={() => dispatch(dislike(movie.id))}>
+            <DislikeIcon />
+          </Logo>
+        </motion.div>
         <b>Dislike</b>
       </LogosContainer>
       <Progress title={`${movie.likes} likes / ${movie.dislikes} dislikes`} max={movie.likes + movie.dislikes} value={movie.likes}>{`${movie.likes} / ${movie.dislikes}`}</Progress>
